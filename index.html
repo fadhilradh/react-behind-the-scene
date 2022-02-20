@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Behind the Scene of React</title>
+      <style>
+         .date {
+            padding: 1rem;
+            background-color: #112e38;
+            color: #53c5b5;
+            border-radius: 8px;
+         }
+         .text {
+            background-color: #1d4652;
+            margin: 0px;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+         }
+      </style>
+      <script src="https://unpkg.com/react@16.5.1/umd/react.development.js"></script>
+      <script src="https://unpkg.com/react-dom@16.5.1/umd/react-dom.development.js"></script>
+      <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+   </head>
+   <body>
+      <div id="app"></div>
+
+      <script type="text/babel">
+         const app = document.getElementById("app");
+
+         // ALL 3 of these approaches work exactly the same :
+
+         // 1. Native Javascript (remove type="text/babel" from script tag above)
+
+         //  const div = document.createElement("div");
+         //  div.className = "date";
+         //  div.setAttribute("id", "my-date");
+
+         //  const span = document.createElement("span");
+         //  div.appendChild(span);
+
+         //  const text = document.createElement("p");
+         //  text.textContent = Date();
+         //  text.className = "text";
+
+         //  span.appendChild(text);
+         //  app.appendChild(div);
+
+         // 2.  React without JSX
+
+         //  const div = React.createElement(
+         //     "div",
+         //     {
+         //        className: "date",
+         //        id: "my-date",
+         //     },
+         //     React.createElement(
+         //        "span",
+         //        {},
+         //        React.createElement("p", { className: "text", children: Date() })
+         //     )
+         //  );
+
+         // 3.  React JSX transpiled with Babel (needs script type="text/babel")
+
+         const div = (
+            <div className="date" id="my-date">
+               <span>
+                  <p className="text">{Date()}</p>
+               </span>
+            </div>
+         );
+
+         ReactDOM.render(div, app);
+      </script>
+   </body>
+</html>
